@@ -1,0 +1,173 @@
+# Nuxt 3 Minimal Starter
+
+Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+
+## Setup
+
+Make sure to install the dependencies:
+
+```bash
+# npm
+npm install
+
+# pnpm
+pnpm install
+
+# yarn
+yarn install
+```
+
+## Development Server
+
+Start the development server on `http://localhost:3000`:
+
+```bash
+# npm
+npm run dev
+
+# pnpm
+pnpm run dev
+
+# yarn
+yarn dev
+```
+
+## Production
+
+Build the application for production:
+
+```bash
+# npm
+npm run build
+
+# pnpm
+pnpm run build
+
+# yarn
+yarn build
+```
+
+Locally preview production build:
+
+```bash
+# npm
+npm run preview
+
+# pnpm
+pnpm run preview
+
+# yarn
+yarn preview
+```
+
+Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+Nuxt2버전 ->
+npm init nuxt-app <project-name>
+
+Nuxt3버전 ->
+npx nuxi init <project-name>
+
+project name : '프로젝트명',
+programming language : Javascript (타입스크립트로 할시 typescript 선택),
+package manager : npm,
+UI framework : None,
+Nuxt.js modules: 그냥 엔터,
+Linting tools : ESLint / Prettier 스페이스바로 선택하고 엔터,
+Testing framework : None,
+Rendering mode : Universal ( SSR / SSG ),
+Deployment target : Server,
+Development tools : jsconfig.json,
+Version control system : Git
+
+cd '프로젝트명'
+npm run dev
+
+### Nuxt3 할때 초반 설정
+
+nuxt.config.ts 파일 열어서
+
+```
+// https://nuxt.com/docs/api/configuration/nuxt-config
+import { resolve } from 'path';
+
+export default defineNuxtConfig({
+ devtools: { enabled: true },
+ alias:{
+   '@': resolve(__dirname, "/"),
+ },
+ css : ["~/css/main.css"]
+})
+
+```
+
+css파일은 assets/main.css 생성
+
+### 모듈추가
+
+npm install -D eslint
+npm install -D prettier
+
+### App.vue
+
+app.vue에서 아래와같이 설정
+
+```
+<template>
+  <div>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </div>
+</template>
+```
+
+### layout/default.vue
+
+```
+<template>
+    <div>
+        <p>디폴트</p>
+        <slot />
+    </div>
+</template>
+```
+
+### layout 적용 안되면 dev 껐다가 재실행
+
+### NuxtLink
+
+기존의 router-link역할
+
+```
+<NuxtLink to="/">이동</NuxtLink>
+```
+
+### backend 폴더 설치
+
+backend 폴더 그대로 복사붙여넣기 (테스트용 API 쓸때만)
+backend폴더로 들어가서 npm install
+npm run dev로 실행
+다시 메인폴더 가서 npm run dev 하면 port번호가 다르다
+
+### axios 설치
+
+npm i axios
+
+### useAsyncData
+
+처음부터 data를 가져오는방법
+
+```
+<script setup>
+const { data: products } = await useAsyncData('products', () =>
+    $fetch("http://localhost:3000/products")
+)
+</script>
+```
+
+nuxt3에서는 가져오는 방식이 다르니 주의 (setup방식을 사용함)
+
+### nuxt3에서는 vuex 사용 불가능
+
+-> pinia를 쓴다
